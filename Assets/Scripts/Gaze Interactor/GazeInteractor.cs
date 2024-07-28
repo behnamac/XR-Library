@@ -3,15 +3,18 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using UnityEngine.Events;
+using System.Threading;
 
 public class GazeInteractor : MonoBehaviour
 {
-    public float gazeTime = 2.0f; // Time required to gaze at a button to select it
-    private float gazeCounter;
-    private bool isGazing;
-    private GameObject gazedObject;
-    [SerializeField] private UnityEvent onGazeEvent;
+    private float gazeTime = 5;
+    private float currentTime;
+    private Intractable _intractableObj = null;
 
+    private void Awake()
+    {
+        currentTime = gazeTime;
+    }
     void Update()
     {
         // Check if the user is gazing at an object with a collider
@@ -19,28 +22,30 @@ public class GazeInteractor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.gameObject != gazedObject)
+            if (hit.collider.TryGetComponent(out Intractable intractableObj))
             {
-                gazedObject = hit.collider.gameObject;
-                gazeCounter = 0;
-                isGazing = true;
+                _intractableObj = intractableObj;
+                currentTime -= Time.deltaTime;
+                if (currentTime < 0)
+                {
+                    print("I have an object");
+                    _intractableObj.OnRayHit(currentTime);
+                    currentTime = gazeTime;
+                }
             }
             else
             {
-                gazeCounter += Time.deltaTime;
-                if (gazeCounter >= gazeTime)
-                {
-                    onGazeEvent?.Invoke();
-                    gazeCounter = 0;
-                    isGazing = false;
-                }
+                _intractableObj.OnRayExit();
+                _intractableObj = null;
+                currentTime = gazeTime;
             }
+
         }
-        else
-        {
-            isGazing = false;
-            gazeCounter = 0;
-            gazedObject = null;
-        }
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(transform.position, transform.forward);
     }
 }
