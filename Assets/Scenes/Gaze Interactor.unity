@@ -218,6 +218,7 @@ Transform:
   m_Children:
   - {fileID: 2133151514}
   - {fileID: 8926251847682451055}
+  - {fileID: 1322256468}
   m_Father: {fileID: 1050098547}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &58150569
@@ -1383,6 +1384,79 @@ MonoBehaviour:
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
   m_CancelButton: Cancel
+--- !u!1001 &920193582
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 51593132}
+    m_Modifications:
+    - target: {fileID: 1319225388883507364, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319225388883507364, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.084
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319225388883507364, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.714
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319225388883507364, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319225388883507364, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319225388883507364, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319225388883507364, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319225388883507364, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319225388883507364, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319225388883507364, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5041446047062005599, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+        type: 3}
+      propertyPath: timer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593540083940369013, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+        type: 3}
+      propertyPath: m_Name
+      value: Gaze Intractable (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d97ce029cd36e341b0ebe5c6af6832f, type: 3}
 --- !u!1 &1050098546
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,10 +1752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9080918428776147b2e50b65d89f1a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gazeTime: 2
-  onGazeEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  gazeDuration: 5
 --- !u!1 &1189842458
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,6 +2147,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275923634}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1322256468 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1319225388883507364, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+    type: 3}
+  m_PrefabInstance: {fileID: 920193582}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1341190941
 GameObject:
   m_ObjectHideFlags: 0
@@ -3435,6 +3512,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5041446047062005599, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
+        type: 3}
+      propertyPath: timer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6593540083940369013, guid: 6d97ce029cd36e341b0ebe5c6af6832f,
         type: 3}

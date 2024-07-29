@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ForceIntract : Intractable
@@ -9,10 +10,11 @@ public class ForceIntract : Intractable
     {
         rb = GetComponent<Rigidbody>();
     }
-    public override void OnRayHit(float timer)
+
+
+    public override void OnRayHit()
     {
-        base.OnRayHit(timer);
+        base.OnRayHit();
         rb.AddForce(Vector3.forward * power * Time.deltaTime, ForceMode.Impulse);
-        
-    }
+   }
 }

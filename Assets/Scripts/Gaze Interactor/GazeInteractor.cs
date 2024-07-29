@@ -1,46 +1,60 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using System.Collections;
-using UnityEngine.Events;
-using System.Threading;
 
 public class GazeInteractor : MonoBehaviour
 {
-    private float gazeTime = 5;
-    private float currentTime;
-    private Intractable _intractableObj = null;
+    [SerializeField] private float gazeDuration = 5f; // Duration to gaze before triggering OnRayHit
+    private float gazeTimer;
+    private Intractable _currentIntractableObj = null;
+    private Intractable _lastIntractableObj = null;
 
     private void Awake()
     {
-        currentTime = gazeTime;
+        //gazeTimer = gazeDuration;
     }
+
     void Update()
     {
         // Check if the user is gazing at an object with a collider
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
+
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.collider.TryGetComponent(out Intractable intractableObj))
             {
-                _intractableObj = intractableObj;
-                currentTime -= Time.deltaTime;
-                if (currentTime < 0)
+                if (intractableObj != _lastIntractableObj)
                 {
-                    print("I have an object");
-                    _intractableObj.OnRayHit(currentTime);
-                    currentTime = gazeTime;
+                    _currentIntractableObj = intractableObj;
+                    _lastIntractableObj = _currentIntractableObj;
+                    ResetGaze();
+                }
+                else
+                {
+                    // Continue gazing at the same object
+                    gazeTimer -= Time.deltaTime;
+                    if (gazeTimer <= 0f)
+                    {
+                        _lastIntractableObj.OnRayHit();
+                        ResetGaze(); // Optionally reset gaze after triggering OnRayHit
+                    }
                 }
             }
-            else
-            {
-                _intractableObj.OnRayExit();
-                _intractableObj = null;
-                currentTime = gazeTime;
-            }
-
         }
+        else
+        {
+            if (_lastIntractableObj != null)
+            {
+                _lastIntractableObj.OnRayExit();
+                ResetGaze();
+                _lastIntractableObj = null;
+            }
+        }
+    }
+
+    private void ResetGaze()
+    {
+        gazeTimer = _lastIntractableObj.getTimer();
+        _currentIntractableObj = null;
     }
 
     public void OnDrawGizmos()
