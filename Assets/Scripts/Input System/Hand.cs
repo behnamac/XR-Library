@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class Hand :  MonoBehaviour
+public class Hand : MonoBehaviour
 {
     //Stores handPrefab to be Instantiated
     public GameObject handPrefab;
@@ -20,7 +21,9 @@ public class Hand :  MonoBehaviour
     {
         InitializeHand();
     }
+  
 
+   
     private void InitializeHand()
     {
         List<InputDevice> devices = new List<InputDevice>();
@@ -31,7 +34,7 @@ public class Hand :  MonoBehaviour
         //We check if any devices are found here to avoid errors.
         if (devices.Count > 0)
         {
-            
+
             _targetDevice = devices[0];
 
             GameObject spawnedHand = Instantiate(handPrefab, transform);
@@ -44,7 +47,7 @@ public class Hand :  MonoBehaviour
     private void Update()
     {
         //Since our target device might not register at the start of the scene, we continously check until one is found.
-        if(!_targetDevice.isValid)
+        if (!_targetDevice.isValid)
         {
             InitializeHand();
         }
